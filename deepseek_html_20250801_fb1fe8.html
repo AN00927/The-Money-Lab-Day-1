@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Money Lab: Understanding Money</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 5px solid var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            background: white;
+            color: var(--secondary);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .download-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--secondary);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .callout {
+            background-color: rgba(231, 76, 60, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .callout h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .formula {
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-family: monospace;
+            border: 1px solid var(--success);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f7fd;
+        }
+        
+        .case-study {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px dashed var(--secondary);
+        }
+        
+        .case-study h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .scenario {
+            background-color: rgba(46, 204, 113, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid var(--success);
+        }
+        
+        .scenario h4 {
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+        
+        .quick-check {
+            background-color: rgba(155, 89, 182, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .quick-check h4 {
+            color: #9b59b6;
+            margin-bottom: 15px;
+        }
+        
+        .real-world {
+            background-color: rgba(241, 196, 15, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        .real-world h4 {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 5px solid var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">$</div>
+                <div>
+                    <h1>The Money Lab</h1>
+                    <p class="subtitle">Financial Literacy Course - Section 1: Understanding Money</p>
+                </div>
+            </div>
+            <a href="#" class="download-btn">Download Full Educational Packet (PDF)</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>1.1 The History and Evolution of Money</h2>
+            
+            <p>Money has transformed dramatically throughout human history. Understanding this evolution helps us appreciate the modern financial systems we use today.</p>
+            
+            <h3>From Barter to Digital Currency</h3>
+            
+            <ul>
+                <li><strong>Barter System (Pre-600 BC):</strong> Direct exchange of goods/services without a standardized medium</li>
+                <li><strong>Commodity Money (600 BC):</strong> First standardized currency in Lydia (modern Turkey) using electrum coins</li>
+                <li><strong>Gold Standard (1816-1971):</strong> Currencies backed by physical gold reserves</li>
+                <li><strong>Fiat Money (1971-Present):</strong> Currency value based on government decree rather than physical commodities</li>
+                <li><strong>Digital Currency (2009-Present):</strong> Bitcoin introduced blockchain-based decentralized currency</li>
+            </ul>
+            
+            <div class="case-study">
+                <h4>🇿🇼 Zimbabwe Hyperinflation Case Study (2007-2009)</h4>
+                
+                <p><strong>Background:</strong> Zimbabwe faced massive economic crisis due to political instability and failed land reforms. Government spending soared while tax revenue collapsed.</p>
+                
+                <p><strong>Decision:</strong> The government printed Zimbabwe dollars to cover budget deficits:</p>
+                <ul>
+                    <li>Printed Z$100 trillion notes (100,000,000,000,000)</li>
+                    <li>Money supply increased by 79.6 billion percent</li>
+                </ul>
+                
+                <p><strong>Consequences:</strong></p>
+                <ul>
+                    <li>Hyperinflation peaked at 89.7 sextillion percent (89,700,000,000,000,000,000%)</li>
+                    <li>A loaf of bread cost 5 trillion Zimbabwe dollars by 2008</li>
+                    <li>Workers needed wheelbarrows to carry their daily wages</li>
+                    <li>Basic goods disappeared from store shelves</li>
+                </ul>
+                
+                <p><strong>Recovery:</strong> Zimbabwe abandoned its currency in 2009, adopting USD and other foreign currencies. Lessons learned:</p>
+                <ul>
+                    <li>Money requires public trust and responsible management</li>
+                    <li>Printing money doesn't create real economic value</li>
+                    <li>Hyperinflation destroys savings and economic stability</li>
+                </ul>
+            </div>
+            
+            <h3>Modern Currency: Trust and Government Backing</h3>
+            
+            <p>Today's money has value because:</p>
+            <ul>
+                <li><strong>Government Decree:</strong> Legal tender status requires acceptance</li>
+                <li><strong>Central Bank Management:</strong> Institutions like the Federal Reserve control supply</li>
+                <li><strong>Public Trust:</strong> Collective belief in currency's value</li>
+                <li><strong>Stability:</strong> Low, predictable inflation preserves purchasing power</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>1.2 Forms of Money Today</h2>
+            
+            <h3>Cash/Checks</h3>
+            
+            <div class="highlight">
+                <p><strong>Pros:</strong> Universally accepted, easy to use, helps visualize spending, no technology required</p>
+                <p><strong>Cons:</strong> Can be lost/stolen, impractical for large amounts, no online usability, no interest earnings</p>
+            </div>
+            
+            <p><strong>When to use:</strong> Small everyday purchases, transactions with vendors who don't accept cards, situations requiring anonymity</p>
+            
+            <div class="callout">
+                <h4>Writing a Check - Step by Step</h4>
+                <ol>
+                    <li>Date: Current date in top right corner</li>
+                    <li>Payee: "Pay to the order of" line - recipient's name</li>
+                    <li>Amount (numerical): Right-hand box with $ sign</li>
+                    <li>Amount (written): Line below payee - dollars and cents</li>
+                    <li>Memo: Optional note about payment purpose</li>
+                    <li>Signature: Bottom right - matches bank signature card</li>
+                </ol>
+                <p>Note: Always record check in your register to avoid overdrafts!</p>
+            </div>
+            
+            <h3>Credit vs. Debit Cards</h3>
+            
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Debit Card</th>
+                    <th>Credit Card</th>
+                </tr>
+                <tr>
+                    <td>Money Source</td>
+                    <td>Your checking account</td>
+                    <td>Borrowed from card issuer</td>
+                </tr>
+                <tr>
+                    <td>Payment Timing</td>
+                    <td>Immediate deduction</td>
+                    <td>Billed monthly (20-30 day grace period)</td>
+                </tr>
+                <tr>
+                    <td>Spending Limit</td>
+                    <td>Account balance</td>
+                    <td>Credit limit ($500-$10,000 for teens)</td>
+                </tr>
+                <tr>
+                    <td>Interest/Fees</td>
+                    <td>None with sufficient funds</td>
+                    <td>15-29% APR if balance not paid in full</td>
+                </tr>
+                <tr>
+                    <td>Credit Building</td>
+                    <td>No impact</td>
+                    <td>Builds history with responsible use</td>
+                </tr>
+                <tr>
+                    <td>Best For</td>
+                    <td>Daily spending, ATM access</td>
+                    <td>Online purchases, building credit, emergencies</td>
+                </tr>
+            </table>
+            
+            <div class="real-world">
+                <h4>⚠️ Credit Card Warning - Real Scenario</h4>
+                <p>Maria (17) got her first credit card with $500 limit. She spent:</p>
+                <ul>
+                    <li>$200 on concert tickets</li>
+                    <li>$150 on clothes</li>
+                    <li>$100 on dinners with friends</li>
+                </ul>
+                <p>She paid only $50 monthly minimum. After 1 year:</p>
+                <ul>
+                    <li>Original debt: $450</li>
+                    <li>Interest at 24% APR: $108/year</li>
+                    <li>Total paid: $600 ($150 principal + $450 interest)</li>
+                    <li>Still owed: $300</li>
+                </ul>
+                <p><strong>Lesson:</strong> Pay credit cards in full each month to avoid debt traps!</p>
+            </div>
+            
+            <h3>Digital Wallets</h3>
+            
+            <p>Platforms: Apple Pay, Google Pay, Samsung Pay, Venmo, PayPal, Cash App, Zelle</p>
+            
+            <div class="highlight">
+                <p><strong>Security Features:</strong> Tokenization (unique digital codes), biometric authentication (fingerprint/face ID), encryption, device lockdown</p>
+                <p><strong>Limitations:</strong> Not accepted at all retailers (especially small businesses), device dependency, transaction limits ($1,000-$10,000 daily), compatibility issues between platforms</p>
+            </div>
+            
+            <h3>Cryptocurrency</h3>
+            
+            <p><strong>Blockchain Explained:</strong> A decentralized digital ledger recording transactions across thousands of computers. Once added, records can't be altered - creating transparency and security.</p>
+            
+            <table>
+                <tr>
+                    <th>Cryptocurrency</th>
+                    <th>2021 High</th>
+                    <th>2022 Low</th>
+                    <th>Volatility</th>
+                </tr>
+                <tr>
+                    <td>Bitcoin (BTC)</td>
+                    <td>$68,789</td>
+                    <td>$15,480</td>
+                    <td>-77.5%</td>
+                </tr>
+                <tr>
+                    <td>Ethereum (ETH)</td>
+                    <td>$4,878</td>
+                    <td>$880</td>
+                    <td>-82%</td>
+                </tr>
+                <tr>
+                    <td>Dogecoin (DOGE)</td>
+                    <td>$0.73</td>
+                    <td>$0.05</td>
+                    <td>-93%</td>
+                </tr>
+            </table>
+            
+            <div class="callout">
+                <h4>Why Cryptocurrency Isn't Widely Accepted</h4>
+                <ul>
+                    <li>Price volatility makes pricing difficult</li>
+                    <li>Transaction speeds vary (Bitcoin: 10 min/transaction)</li>
+                    <li>Regulatory uncertainty in many countries</li>
+                    <li>Energy consumption concerns (Bitcoin uses more electricity than Argentina)</li>
+                    <li>Security risks and irreversible transactions</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>1.3 Value of Money & Purchasing Power</h2>
+            
+            <div class="real-world">
+                <h4>💰 Purchasing Power Around the World</h4>
+                <p><strong>$2 USD buys:</strong></p>
+                <ul>
+                    <li>🇺🇸 USA: King-size Snickers bar</li>
+                    <li>🇮🇳 India: Full vegetarian meal (rice, lentils, vegetables)</li>
+                    <li>🇲🇽 Mexico: 4 street tacos</li>
+                    <li>🇻🇳 Vietnam: 2 banh mi sandwiches</li>
+                    <li>🇫🇷 France: Not even a bottle of water (costs $2.50)</li>
+                </ul>
+            </div>
+            
+            <h3>Inflation Explained</h3>
+            
+            <p>Inflation = General increase in prices over time, reducing purchasing power</p>
+            
+            <div class="scenario">
+                <h4>Historical Inflation Example</h4>
+                <p>In 1980, you could buy:</p>
+                <ul>
+                    <li>Movie ticket: $2.89</li>
+                    <li>Gallon of gas: $1.19</li>
+                    <li>New car: $7,200</li>
+                </ul>
+                <p>Today (2024) those same items cost:</p>
+                <ul>
+                    <li>Movie ticket: $12.00 (315% increase)</li>
+                    <li>Gallon of gas: $3.80 (219% increase)</li>
+                    <li>New car: $48,000 (567% increase)</li>
+                </ul>
+                <p>Average inflation: 3.2% per year since 1980</p>
+            </div>
+            
+            <h3>Currency Exchange Impacts</h3>
+            
+            <p>Exchange rates constantly fluctuate based on:</p>
+            <ul>
+                <li>Economic performance</li>
+                <li>Interest rates</li>
+                <li>Political stability</li>
+                <li>Market speculation</li>
+            </ul>
+            
+            <div class="highlight">
+                <p><strong>Practical Effect:</strong> When the US dollar strengthens, American tourists can buy more abroad. When it weakens, imports become more expensive. In July 2024:</p>
+                <ul>
+                    <li>$1 USD = 0.93 Euro (Europe vacation more expensive)</li>
+                    <li>$1 USD = 157 Japanese Yen (Japan vacation cheaper)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>1.4 Time Value of Money (TVM)</h2>
+            
+            <div class="formula">
+                FV = PV × (1 + r)<sup>n</sup>
+                <p>FV = Future Value | PV = Present Value | r = Interest Rate | n = Time Periods</p>
+            </div>
+            
+            <div class="scenario">
+                <h4>Stacey vs. Jeff - Complete Scenario</h4>
+                
+                <p><strong>Choice:</strong> $100 now vs. $200 in 2 months</p>
+                
+                <p><strong>Stacey's Strategy (Takes $100 now):</strong></p>
+                <ul>
+                    <li>$25 in high-yield savings at 7% APR compounded weekly</li>
+                    <li>$75 invested in tech stocks</li>
+                </ul>
+                
+                <p><strong>Calculations:</strong></p>
+                <ul>
+                    <li>Savings: $25 × (1 + 0.07/52)<sup>8.286</sup> = $25.60</li>
+                    <li>Investments: $75 × (1 + 1.30) = $172.50 (130% return)</li>
+                    <li>Total after 2 months: $25.60 + $172.50 = $198.10</li>
+                </ul>
+                
+                <p><strong>Jeff's Result:</strong> Waits 2 months, receives $200</p>
+                
+                <p><strong>Outcome:</strong> Jeff has $200, Stacey has $198.10 - Jeff wins? Not exactly...</p>
+                
+                <p><strong>Long-term Advantage:</strong> Stacey now has $172.50 working for her in investments, while Jeff starts with $200 cash. After 1 year at 7%:</p>
+                <ul>
+                    <li>Stacey: $172.50 × (1.07) = $184.58 + $25.60 = $210.18</li>
+                    <li>Jeff: $200 × (1.07) = $214.00</li>
+                </ul>
+                
+                <p><strong>Key Insight:</strong> Money now has more potential because it can immediately start working for you through investments or interest.</p>
+            </div>
+            
+            <h3>Worked TVM Examples</h3>
+            
+            <div class="highlight">
+                <p><strong>Example 1:</strong> You invest $500 at 6% annual interest for 2 years.</p>
+                <p>FV = 500 × (1 + 0.06)<sup>2</sup> = 500 × 1.1236 = $561.80</p>
+            </div>
+            
+            <div class="highlight">
+                <p><strong>Example 2:</strong> $200 at 4% interest for 5 years with quarterly compounding.</p>
+                <p>Periods = 5 × 4 = 20 | Rate per period = 4%/4 = 1%<br>
+                FV = 200 × (1 + 0.01)<sup>20</sup> = 200 × 1.2202 = $244.04</p>
+            </div>
+            
+            <div class="highlight">
+                <p><strong>Example 3:</strong> $50 at 10% interest for 4 years.</p>
+                <p>FV = 50 × (1.10)<sup>4</sup> = 50 × 1.4641 = $73.21<br>
+                Earnings = $73.21 - $50 = $23.21</p>
+            </div>
+            
+            <h3>Monthly Investment Growth</h3>
+            
+            <table>
+                <tr>
+                    <th>Year</th>
+                    <th>Total Deposited</th>
+                    <th>Interest Earned</th>
+                    <th>Total Value</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>$120</td>
+                    <td>$3.06</td>
+                    <td>$123.06</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>$240</td>
+                    <td>$12.36</td>
+                    <td>$252.36</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>$360</td>
+                    <td>$28.42</td>
+                    <td>$388.42</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>$480</td>
+                    <td>$50.84</td>
+                    <td>$530.84</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>$600</td>
+                    <td>$80.38</td>
+                    <td>$680.38</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>$720</td>
+                    <td>$117.54</td>
+                    <td>$837.54</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>$1,200</td>
+                    <td>$477.46</td>
+                    <td>$1,677.46</td>
+                </tr>
+            </table>
+            
+            <div class="callout">
+                <h4>Compound Interest Magic</h4>
+                <p>Notice how in later years, interest earned exceeds deposits! This shows why starting early matters:</p>
+                <ul>
+                    <li>Years 1-5: Deposits = $600 | Interest = $175.06</li>
+                    <li>Years 6-10: Deposits = $600 | Interest = $302.38</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>1.5 Opportunity Cost</h2>
+            
+            <p><strong>Definition:</strong> The value of the next best alternative you give up when making a decision.</p>
+            
+            <div class="scenario">
+                <h4>Pizza Slices vs. Arcade Tokens</h4>
+                
+                <p><strong>Scenario:</strong> You have $12 to spend at the mall. Pizza slices cost $3 each, arcade tokens cost $2 each.</p>
+                
+                <p><strong>Equation:</strong> 3p + 2t = 12 (where p = pizza slices, t = tokens)</p>
+                
+                <table>
+                    <tr>
+                        <th>Option</th>
+                        <th>Pizza Slices</th>
+                        <th>Arcade Tokens</th>
+                        <th>Opportunity Cost</th>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>0</td>
+                        <td>6</td>
+                        <td>No pizza enjoyment</td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td>1</td>
+                        <td>4.5 (not possible)</td>
+                        <td>--</td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>3 tokens (Option A had 6)</td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <td>3</td>
+                        <td>1.5 (not possible)</td>
+                        <td>--</td>
+                    </tr>
+                    <tr>
+                        <td>E</td>
+                        <td>4</td>
+                        <td>0</td>
+                        <td>No arcade enjoyment</td>
+                    </tr>
+                </table>
+                
+                <p><strong>Possible Combinations:</strong></p>
+                <ul>
+                    <li>4 pizzas + 0 tokens</li>
+                    <li>2 pizzas + 3 tokens</li>
+                    <li>0 pizzas + 6 tokens</li>
+                </ul>
+                
+                <p><strong>Decision Framework:</strong></p>
+                <ol>
+                    <li>How hungry am I? (If very hungry, choose pizza-heavy option)</li>
+                    <li>How much do I enjoy the arcade? (If favorite activity, choose token-heavy)</li>
+                    <li>Will I come back soon? (If visiting again tomorrow, maybe choose balance today)</li>
+                    <li>Can I share? (Split pizza with friend to get both experiences)</li>
+                </ol>
+            </div>
+            
+            <h3>Additional Opportunity Cost Scenarios</h3>
+            
+            <div class="highlight">
+                <p><strong>Scenario 1: Study Time Allocation</strong></p>
+                <p>You have 4 hours to study for two exams:</p>
+                <ul>
+                    <li>Math: Current grade 75%, could improve to 85% with 2 hours</li>
+                    <li>History: Current grade 90%, could improve to 95% with 2 hours</li>
+                </ul>
+                <p><strong>Option A:</strong> 2 hours math, 2 hours history → Grades: 85% + 95%</p>
+                <p><strong>Option B:</strong> 3 hours math, 1 hour history → Grades: 88% + 92%</p>
+                <p><strong>Opportunity cost of Option B:</strong> 3% history grade (95%→92%) for 3% math grade (85%→88%)</p>
+            </div>
+            
+            <div class="highlight">
+                <p><strong>Scenario 2: Part-time Job Choice</strong></p>
+                <p>Summer job options:</p>
+                <ul>
+                    <li>Job A: Lifeguard, $12/hour, 30 hours/week, outdoors</li>
+                    <li>Job B: Tutor, $15/hour, 20 hours/week, air-conditioned</li>
+                </ul>
+                <p><strong>Financial:</strong> Job A = $360/week | Job B = $300/week</p>
+                <p><strong>Opportunity cost of Job B:</strong> $60/week but gain 10 hours free time and better working conditions</p>
+            </div>
+            
+            <div class="quick-check">
+                <h4>📝 Quick Check: Understanding Money</h4>
+                <ol>
+                    <li>What gives modern money its value?</li>
+                    <li>What's the main difference between debit and credit cards?</li>
+                    <li>Calculate: $1,000 invested at 8% for 10 years?</li>
+                    <li>You have $20. Movie ticket = $15, Pizza = $10. What's the opportunity cost of seeing the movie?</li>
+                </ol>
+                <p><strong>Answers:</strong> 1) Government backing and public trust, 2) Debit uses your money, credit borrows money, 3) $2,158.92, 4) The pizza you could have bought instead</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>The Money Lab - Financial Literacy Course</p>
+            <p>Created by Arav Mehta & Ahaan Nigam | © 2024 All Rights Reserved</p>
+            <p>Next Section: Smart Spending & Saving | Budgeting | Banking Fundamentals</p>
+        </div>
+    </footer>
+</body>
+</html>
